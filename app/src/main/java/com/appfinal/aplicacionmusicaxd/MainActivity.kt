@@ -20,18 +20,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.botonAleatorio.setOnClickListener{
             //Toast.makeText(this@MainActivity, "Boton de aleatorio Presionado", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@MainActivity, PantallaDeReproduccion::class.java)
-            startActivity(intent)
+            /*val intent = Intent(this@MainActivity, PantallaDeReproduccion::class.java)
+            startActivity(intent)*/
+            startActivity(Intent(this@MainActivity, PantallaDeReproduccion::class.java))
         }
 
         binding.botonFavoritos.setOnClickListener{
-            val intent = Intent(this@MainActivity, PantallaDeFavoritos::class.java)
-            startActivity(intent)
+            /*val intent = Intent(this@MainActivity, PantallaDeFavoritos::class.java)
+            startActivity(intent)*/
+            startActivity(Intent(this@MainActivity, PantallaDeFavoritos::class.java))
         }
 
         binding.botonListas.setOnClickListener{
-            val intent = Intent(this@MainActivity, PantallaDeListas::class.java)
-            startActivity(intent)
+            /*val intent = Intent(this@MainActivity, PantallaDeListas::class.java)
+            startActivity(intent)*/
+            startActivity(Intent(this@MainActivity, PantallaDeListas::class.java))
         }
     }
 }
