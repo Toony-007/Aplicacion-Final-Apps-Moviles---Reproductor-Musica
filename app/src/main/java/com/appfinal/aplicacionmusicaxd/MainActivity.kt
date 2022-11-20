@@ -3,24 +3,36 @@ package com.appfinal.aplicacionmusicaxd
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // Creacndo primer objeto obligatorio
+    // Creando primer objeto obligatorio
     private lateinit var binding: ActivityMainBinding
+
+    // Creando segundo objeto para la navegacion lateral
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        solicitandoPermisoDeTiempoDeEjecución()
+        solicitandoPermisoDeTiempoDeEjecucion()
         setTheme(R.style.Theme_AplicacionMusicaXD)
 
         // Inicializando el objeto binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Para la ventana de naveagcion lateral
+        toggle = ActionBarDrawerToggle(this, binding.root, R.string.txt_abierto, R.string.txt_cerrado)
+        binding.root.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         // ASignando accion al boton aleatorio.
         binding.botonAleatorio.setOnClickListener{
@@ -46,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Para pedir permiso
-    private fun solicitandoPermisoDeTiempoDeEjecución()
+    private fun solicitandoPermisoDeTiempoDeEjecucion()
     {
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED)
@@ -70,5 +82,11 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     , 13)
         }
+    }
+
+override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    if (toggle.onOptionsItemSelected(item))
+        return true
+    return super.onOptionsItemSelected(item)
     }
 }
