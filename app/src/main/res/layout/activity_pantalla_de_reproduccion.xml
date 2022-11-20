@@ -14,8 +14,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_weight="1"
         >
 
+<!--        Boton de regresar-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,17 +28,19 @@
             tools:ignore="UseAppTint"
             android:contentDescription="@string/btn_regresar" />
 
+<!--        Mundo de canciones-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:text="@string/txt_canciones_totales"
+            android:text="@string/txt_mundo_de_canciones"
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_weight="1"
-            />
+            tools:ignore="NestedWeights" />
 
+<!--        Boton para favorito-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,16 +75,20 @@
         android:gravity="center"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_weight="1"
         />
 
+<!--    Botones flotantes para Anterior, Pausa y Siguiente-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:gravity="center"
+        android:layout_weight="1"
         >
 
+<!--        Boton para anterior-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,6 +96,7 @@
             app:iconSize="40dp"
             />
 
+<!--        Boton para pausa-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,6 +108,7 @@
             app:iconTint="@color/white"
             />
 
+<!--        Boton para siguiente-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,12 +117,14 @@
             />
 
     </LinearLayout>
-    
+
+<!--    Seekbar y TextViews para reproduccion-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:orientation="horizontal"
         android:layout_margin="20dp"
+        android:layout_weight="1"
         >
 
         <TextView
@@ -122,12 +134,14 @@
             android:textSize="15sp"
             android:text="@string/tv_inicio"
             android:textStyle="bold"
+            android:gravity="center"
             />
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            tools:ignore="NestedWeights"
             />
 
         <TextView
@@ -137,6 +151,60 @@
             android:textSize="15sp"
             android:text="@string/tv_finalizar"
             android:textStyle="bold"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        >
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_repetir"
+            android:background="@android:color/transparent"
+            android:tint="@color/Rosa_Personalizado"
+            tools:ignore="NestedWeights,UseAppTint"
+            android:contentDescription="@string/txt_repetir"
+            android:layout_weight="1"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_ecualizador"
+            android:background="@android:color/transparent"
+            android:tint="@color/Rosa_Personalizado"
+            tools:ignore="UseAppTint"
+            android:contentDescription="@string/txt_ecualizador"
+            android:layout_weight="1"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_tiempo"
+            android:background="@android:color/transparent"
+            android:tint="@color/Rosa_Personalizado"
+            tools:ignore="UseAppTint"
+            android:contentDescription="@string/txt_temporizador"
+            android:layout_weight="1"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_compartir"
+            android:background="@android:color/transparent"
+            android:tint="@color/Rosa_Personalizado"
+            tools:ignore="UseAppTint"
+            android:contentDescription="@string/txt_compartir"
+            android:layout_weight="1"
             />
 
     </LinearLayout>
