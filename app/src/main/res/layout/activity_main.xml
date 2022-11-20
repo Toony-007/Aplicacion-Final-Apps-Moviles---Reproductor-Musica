@@ -81,11 +81,14 @@
 
     </LinearLayout>
 
+<!--    Agrupa al ecabezado los items de la seccion de navegacion-->
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:headerLayout="@layout/activity_encabezado_de_navegacion"
+        app:menu="@menu/activity_menu_de_navegacion"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>
