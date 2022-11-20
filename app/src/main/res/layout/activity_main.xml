@@ -75,6 +75,7 @@
 
 <!--        Seccion para la lista de canciones-->
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pnl_canciones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
