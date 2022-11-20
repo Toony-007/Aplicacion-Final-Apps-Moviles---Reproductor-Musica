@@ -3,7 +3,7 @@
     <string name="btn_aleatorio">Aleatorio</string>
     <string name="btn_favoritos">Favoritos</string>
     <string name="btn_listas">Listas</string>
-    <string name="txt_canciones_totales">Canciónes Totales</string>
+    <string name="txt_canciones_totales">Canciónes Totales:</string>
     <string name="txt_mundo_de_canciones">Mundo De Canciones</string>
     <string name="txt_nombre_cancion">Nombre Canción</string>
     <string name="btn_regresar">Regresar</string>
@@ -13,4 +13,6 @@
     <string name="txt_ecualizador">Ecualizador</string>
     <string name="txt_temporizador">Temporizador</string>
     <string name="txt_compartir">Compartir</string>
+    <string name="txt_abierto">Abierto</string>
+    <string name="txt_cerrado">Cerrado</string>
 </resources>
