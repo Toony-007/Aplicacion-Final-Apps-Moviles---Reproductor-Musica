@@ -24,9 +24,7 @@
             android:layout_marginStart="5dp"
             android:tint="@color/black"
             tools:ignore="UseAppTint"
-            android:contentDescription="@string/btn_regresar"
-            android:backgroundTint="@android:color/holo_red_dark"
-            />
+            android:contentDescription="@string/btn_regresar" />
 
         <TextView
             android:layout_width="0dp"
@@ -97,6 +95,8 @@
             app:iconSize="50dp"
             android:layout_marginHorizontal="25dp"
             app:shapeAppearanceOverlay="@style/curva"
+            android:backgroundTint="@android:color/holo_red_light"
+            app:iconTint="@color/white"
             />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -104,6 +104,39 @@
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_siguiente"
             app:iconSize="40dp"
+            />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="@string/tv_inicio"
+            android:textStyle="bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="@string/tv_finalizar"
+            android:textStyle="bold"
             />
 
     </LinearLayout>

@@ -7,4 +7,6 @@
     <string name="txt_mundo_de_canciones">Mundo De Canciones</string>
     <string name="txt_nombre_cancion">Nombre Canción</string>
     <string name="btn_regresar">Regresar</string>
+    <string name="tv_inicio">00:00</string>
+    <string name="tv_finalizar">Cargando..</string>
 </resources>
