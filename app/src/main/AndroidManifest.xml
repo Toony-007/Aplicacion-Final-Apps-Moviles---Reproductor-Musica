@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/splash_screen"
         tools:targetApi="31">
+
         <activity
             android:name=".PantallaDeListas"
             android:exported="false"
@@ -19,8 +20,10 @@
             tools:ignore="LockedOrientationActivity">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value
+                    ="" />
         </activity>
+
         <activity
             android:name=".PantallaDeFavoritos"
             android:exported="false"
@@ -30,6 +33,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".PantallaDeReproduccion"
             android:exported="false"
@@ -39,6 +43,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -54,6 +59,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
 
 </manifest>
