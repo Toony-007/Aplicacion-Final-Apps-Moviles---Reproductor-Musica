@@ -10,7 +10,7 @@ class PantallaDeListas : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_AplicacionMusicaXD)
+        setTheme(R.style.Rosa_Personsalizado_Actividades)
 
         // Inicializando el objeto binding
         binding = ActivityMainBinding.inflate(layoutInflater)

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         solicitandoPermisoDeTiempoDeEjecucion()
-        setTheme(R.style.Theme_AplicacionMusicaXD)
+        setTheme(R.style.Rosa_Personsalizado_Navegacion)
 
         // Inicializando el objeto binding
         binding = ActivityMainBinding.inflate(layoutInflater)

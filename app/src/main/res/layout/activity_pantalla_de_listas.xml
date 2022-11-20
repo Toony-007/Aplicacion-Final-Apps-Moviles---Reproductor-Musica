@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantallaDeListas">
+    tools:context=".PantallaDeListas"
+    >
 
     <!--    Fila uno. titulo y boton de regreso-->
     <LinearLayout
@@ -15,7 +16,8 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <!--        Boton de regresar-->
         <ImageButton
@@ -25,7 +27,9 @@
             android:contentDescription="@string/btn_regresar"
             android:src="@drawable/ic_regresar"
             android:tint="@color/white"
-            tools:ignore="UseAppTint" />
+            tools:ignore="UseAppTint"
+
+            />
 
         <!--        Titulo favoritos-->
         <TextView
