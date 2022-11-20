@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/item_num_1"
-        android:title="item_num_1"
+    <item android:id="@+id/nav_foro"
+        android:title="@string/txt_foro"
+        android:icon="@drawable/ic_foro"
         />
 
-    <item android:id="@+id/item_num_2"
-        android:title="item_num_2"
+    <item android:id="@+id/nav_ajustes"
+        android:title="@string/txt_ajustes"
+        android:icon="@drawable/ic_ajustes"
         />
 
-    <item android:id="@+id/item_num_3"
-        android:title="item_num_3"
+    <item android:id="@+id/nav_acerca_de"
+        android:title="@string/txt_acerca_de"
+        android:icon="@drawable/ic_acerca_de"
         />
 
-    <item android:id="@+id/item_num_4"
-        android:title="item_num_4"
+    <item android:id="@+id/nav_salir"
+        android:title="@string/txt_salir"
+        android:icon="@drawable/ic_salir"
         />
 
 </menu>

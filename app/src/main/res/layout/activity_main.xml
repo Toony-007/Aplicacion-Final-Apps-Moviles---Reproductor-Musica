@@ -83,6 +83,7 @@
 
 <!--    Agrupa al ecabezado los items de la seccion de navegacion-->
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/vw_navegacion"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
