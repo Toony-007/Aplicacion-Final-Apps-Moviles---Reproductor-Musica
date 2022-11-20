@@ -6,29 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".PantallaDeFavoritos">
 
+<!--    Fila uno. titulo y boton de regreso-->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/Rosa_Personalizado"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/Rosa_Personalizado"
-        
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-
+        <!--        Boton de regresar-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:src="@drawable/ic_regresar"
-            android:contentDescription="@string/btn_regresar"
             android:backgroundTint="@android:color/transparent"
-            android:tint="@color/black"
+            android:contentDescription="@string/btn_regresar"
+            android:src="@drawable/ic_regresar"
+            android:tint="@color/white"
             tools:ignore="UseAppTint" />
+
+        <!--        Titulo favoritos-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/btn_favoritos"
+            android:gravity="center"
+            android:text="@string/btn_favoritos"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 
+<!--    Boton de reproduccion aleatoria-->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:icon="@drawable/ic_aleatorio"
+        app:iconSize="35dp"
+        app:iconTint="@color/Rosa_Personalizado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/Rosa_Personalizado"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
