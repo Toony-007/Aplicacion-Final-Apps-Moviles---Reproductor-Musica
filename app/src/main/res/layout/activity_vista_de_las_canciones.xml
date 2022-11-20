@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="2dp"
+    android:layout_marginBottom="5dp">
+
+<!--    Imagen de la cancion-->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_cancion"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_reproductor_musica"
+        app:shapeAppearanceOverlay="@style/curva"
+        android:layout_marginStart="5dp"
+        />
+
+<!--    Nombre de la cancion-->
+    <TextView
+        android:id="@+id/id_nombre_cancion"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/txt_nombre_cancion"
+        android:layout_toEndOf="@+id/img_cancion"
+        android:layout_toStartOf="@id/id_duracion_cancion"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        />
+
+<!--    Nombre del album-->
+    <TextView
+        android:id="@+id/id_album_cancion"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="@string/txt_album_cancion"
+        android:layout_toEndOf="@+id/img_cancion"
+        android:layout_toStartOf="@id/id_duracion_cancion"
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        />
+
+<!--    Duracion de la cancion-->
+    <TextView
+        android:id="@+id/id_duracion_cancion"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/tv_inicio"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        />
+
+
+</RelativeLayout>
