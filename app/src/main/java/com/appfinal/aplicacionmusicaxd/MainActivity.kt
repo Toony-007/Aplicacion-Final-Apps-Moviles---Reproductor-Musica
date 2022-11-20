@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityMainBinding
 import kotlin.system.exitProcess
 
@@ -19,20 +20,12 @@ class MainActivity : AppCompatActivity() {
     // Creando segundo objeto para la navegacion lateral
     private lateinit var toggle: ActionBarDrawerToggle
 
+    // Creando tercer objeto para la clase adaptador de musica
+    private lateinit var AdaptadorDeMusica: AdaptadorDeMusica
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        solicitandoPermisoDeTiempoDeEjecucion()
-        setTheme(R.style.Rosa_Personsalizado_Navegacion)
-
-        // Inicializando el objeto binding
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Para la ventana de naveagcion lateral
-        toggle = ActionBarDrawerToggle(this, binding.root, R.string.txt_abierto, R.string.txt_cerrado)
-        binding.root.addDrawerListener(toggle)
-        toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        initializeLayout()
 
 
         // ASignando accion al boton aleatorio.
@@ -81,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Resultado de la solicitud de permisos
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -97,9 +91,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    if (toggle.onOptionsItemSelected(item))
-        return true
-    return super.onOptionsItemSelected(item)
+    // Elemento de opciones seleccionado
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item))
+            return true
+        return super.onOptionsItemSelected(item)
+    }
+
+    // inicializacion de los diseños
+    private fun initializeLayout()
+    {
+        solicitandoPermisoDeTiempoDeEjecucion()
+        setTheme(R.style.Rosa_Personsalizado_Navegacion)
+
+        // Inicializando el objeto binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Para la ventana de naveagcion lateral
+        toggle = ActionBarDrawerToggle(this, binding.root, R.string.txt_abierto, R.string.txt_cerrado)
+        binding.root.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val listaDeCanciones = ArrayList<String>()
+        listaDeCanciones.add("Primera cancion")
+        listaDeCanciones.add("Segunda cancion")
+        listaDeCanciones.add("Tercera cancion")
+        listaDeCanciones.add("Cuarta cancion")
+        listaDeCanciones.add("Quinta cancion")
+        binding.pnlCanciones.setHasFixedSize(true)
+        binding.pnlCanciones.setItemViewCacheSize(13)
+        binding.pnlCanciones.layoutManager = LinearLayoutManager(this@MainActivity)
+        AdaptadorDeMusica = AdaptadorDeMusica(this@MainActivity, listaDeCanciones)
+        binding.pnlCanciones.adapter = AdaptadorDeMusica
+
     }
 }
