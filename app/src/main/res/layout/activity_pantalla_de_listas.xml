@@ -54,8 +54,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
-        app:strokeWidth="2dp"
         app:strokeColor="@color/Rosa_Personalizado"
+        app:strokeWidth="2dp"
         />
 
 
