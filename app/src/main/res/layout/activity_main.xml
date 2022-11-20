@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+<!--            Para botones-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/btn_aleatorio"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:drawableTop="@drawable/ic_aleatorio"
+                android:text="@string/btn_aleatorio"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/btn_favoritos"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:drawableTop="@drawable/ic_favoritos"
+                android:text="@string/btn_favoritos"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/btn_listas"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:drawableTop="@drawable/ic_listas"
+                android:text="@string/btn_listas"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_canciones_totales"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
