@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityMainBinding
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +55,18 @@ class MainActivity : AppCompatActivity() {
             /*val intent = Intent(this@MainActivity, PantallaDeListas::class.java)
             startActivity(intent)*/
             startActivity(Intent(this@MainActivity, PantallaDeListas::class.java))
+        }
+
+        // Asignando accion a los botones de la barra de navegacion.
+        binding.vwNavegacion.setNavigationItemSelectedListener {
+            when(it.itemId)
+            {
+                R.id.nav_foro -> Toast.makeText(baseContext, "Foro", Toast.LENGTH_SHORT).show()
+                R.id.nav_ajustes -> Toast.makeText(baseContext, "Ajustes", Toast.LENGTH_SHORT).show()
+                R.id.nav_acerca_de -> Toast.makeText(baseContext, "Acerca de", Toast.LENGTH_SHORT).show()
+                R.id.nav_salir -> exitProcess(1)
+            }
+            true
         }
     }
 

@@ -15,4 +15,10 @@
     <string name="txt_compartir">Compartir</string>
     <string name="txt_abierto">Abierto</string>
     <string name="txt_cerrado">Cerrado</string>
+    <string name="ic_aplicacion">Icono</string>
+    <string name="txt_Bienvenido">Bienvenido a Repro. \nde musica, XD.</string>
+    <string name="txt_foro">Foro</string>
+    <string name="txt_ajustes">Ajustes</string>
+    <string name="txt_acerca_de">Acerca de</string>
+    <string name="txt_salir">Salir</string>
 </resources>

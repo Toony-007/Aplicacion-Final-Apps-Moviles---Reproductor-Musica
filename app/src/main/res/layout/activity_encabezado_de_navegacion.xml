@@ -4,6 +4,29 @@
     android:layout_height="170dp"
     android:padding="16dp"
     android:background="@color/Rosa_Personalizado"
+    android:orientation="vertical"
+    android:layout_marginTop="80dp"
     >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:src="@mipmap/ic_reproductor_musica_round"
+        android:contentDescription="@string/ic_aplicacion"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/txt_Bienvenido"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:contentDescription="@string/txt_Bienvenido"
+        />
+
+
 
 </LinearLayout>
