@@ -96,6 +96,7 @@
 
 <!--        Boton para anterior-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/id_boton_anterior"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_anterior"
@@ -117,6 +118,7 @@
 
 <!--        Boton para siguiente-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/id_boton_avanzar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_siguiente"
