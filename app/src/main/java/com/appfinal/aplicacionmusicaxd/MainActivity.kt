@@ -1,15 +1,20 @@
 package com.appfinal.aplicacionmusicaxd
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityMainBinding
+import java.io.File
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     // Creando tercer objeto para la clase adaptador de musica
     private lateinit var AdaptadorDeMusica: AdaptadorDeMusica
+
+    companion object
+    {
+        var listaDeMusicaMA : ArrayList<Musica> = ArrayList()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Para pedir permiso
-    private fun solicitandoPermisoDeTiempoDeEjecucion()
+    private fun requestRuntimePermission()
     {
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED)
@@ -75,6 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Resultado de la solicitud de permisos
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -99,9 +110,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     // inicializacion de los diseños
+    //@RequiresApi(Build.VERSION_CODES.R)
+    @SuppressLint("SetTextI18n")
     private fun initializeLayout()
     {
-        solicitandoPermisoDeTiempoDeEjecucion()
+        requestRuntimePermission()
         setTheme(R.style.Rosa_Personsalizado_Navegacion)
 
         // Inicializando el objeto binding
@@ -113,18 +126,54 @@ class MainActivity : AppCompatActivity() {
         binding.root.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        listaDeMusicaMA = getAllAudio()
+        /*
         val listaDeCanciones = ArrayList<String>()
         listaDeCanciones.add("Primera cancion")
         listaDeCanciones.add("Segunda cancion")
         listaDeCanciones.add("Tercera cancion")
         listaDeCanciones.add("Cuarta cancion")
         listaDeCanciones.add("Quinta cancion")
+         */
         binding.pnlCanciones.setHasFixedSize(true)
         binding.pnlCanciones.setItemViewCacheSize(13)
         binding.pnlCanciones.layoutManager = LinearLayoutManager(this@MainActivity)
-        AdaptadorDeMusica = AdaptadorDeMusica(this@MainActivity, listaDeCanciones)
+        AdaptadorDeMusica = AdaptadorDeMusica(this@MainActivity, listaDeMusicaMA)
         binding.pnlCanciones.adapter = AdaptadorDeMusica
+        binding.idCacionesTotales.text = "Canciónes totales: "+AdaptadorDeMusica.itemCount
+    }
+
+
+    @SuppressLint("Recycle", "Range", "SuspiciousIndentation")
+    //@RequiresApi(Build.VERSION_CODES.R)
+    private fun getAllAudio(): ArrayList<Musica>
+    {
+        val listaTemporal = ArrayList<Musica>()
+        val seleccion = MediaStore.Audio.Media.IS_MUSIC + " != 0"
+        val proyeccion = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATE_ADDED,
+            MediaStore.Audio.Media.DATA)
+        val mostrador = this.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proyeccion,seleccion,null,
+            MediaStore.Audio.Media.DATE_ADDED + " DESC", null)
+        if(mostrador != null){
+            if(mostrador.moveToFirst())
+                do {
+                    val tituloM = mostrador.getString(mostrador.getColumnIndex(MediaStore.Audio.Media.TITLE))
+                    val idM = mostrador.getString(mostrador.getColumnIndex(MediaStore.Audio.Media._ID))
+                    val albumM = mostrador.getString(mostrador.getColumnIndex(MediaStore.Audio.Media.ALBUM))
+                    val artistaM = mostrador.getString(mostrador.getColumnIndex(MediaStore.Audio.Media.ARTIST))
+                    val recorridoM = mostrador.getString(mostrador.getColumnIndex(MediaStore.Audio.Media.DATA))
+                    val duracionM = mostrador.getLong(mostrador.getColumnIndex(MediaStore.Audio.Media.DURATION))
+                    val musica = Musica(id = idM, titulo = tituloM, album = albumM, artista = artistaM, recorrido = recorridoM, duracion = duracionM)
+                    val archivo = File(musica.recorrido)
+                    if(archivo.exists())
+                        listaTemporal.add(musica)
+                }while (mostrador.moveToNext())
+            mostrador.close()
+        }
+        return listaTemporal
 
     }
+
+
 }
