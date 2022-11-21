@@ -31,7 +31,12 @@ class PantallaDeReproduccion : AppCompatActivity() {
             if (estaReproduciendo) pauseMusic()
             else playMusic()
         }
-
+        binding.idBotonAnterior.setOnClickListener{
+            prevNextSong(increment = false)
+        }
+        binding.idBotonAvanzar.setOnClickListener{
+            prevNextSong(increment = true)
+        }
          //setContentView(R.layout.activity_pantalla_de_reproduccion)
     }
 
@@ -88,5 +93,37 @@ class PantallaDeReproduccion : AppCompatActivity() {
         binding.idBotonPlayYPause.setIconResource(R.drawable.ic_reproducir)
         estaReproduciendo = false
         mediaPlayer!!.pause()
+    }
+
+    private fun prevNextSong(increment: Boolean)
+    {
+        if(increment)
+        {
+            setSongPocisition(increment = true)
+            setLayout()
+            createMeadiaPlayer()
+        }
+        else
+        {
+            setSongPocisition(increment = false)
+            setLayout()
+            createMeadiaPlayer()
+        }
+    }
+
+    private fun setSongPocisition(increment: Boolean)
+    {
+        if(increment)
+        {
+            if(listaDeReproduccionCanciones.size - 1 == pocisionDeLaCancion)
+                pocisionDeLaCancion = 0
+            else ++pocisionDeLaCancion
+        }
+        else
+        {
+            if(0 == pocisionDeLaCancion)
+                pocisionDeLaCancion = listaDeReproduccionCanciones.size - 1
+            else --pocisionDeLaCancion
+        }
     }
 }
