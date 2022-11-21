@@ -38,6 +38,8 @@ class AdaptadorDeMusica(private val contexto: Context, private val listaDeCancio
             .into(holder.imagen)
         holder.root.setOnClickListener{
             val intent = Intent(contexto, PantallaDeReproduccion::class.java)
+            intent.putExtra("indice", position)
+            intent.putExtra("clase", "AdaptadorDeMusica")
             ContextCompat.startActivity(contexto, intent, null)
         }
     }
