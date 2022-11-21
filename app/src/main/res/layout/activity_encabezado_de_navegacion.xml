@@ -27,6 +27,5 @@
         android:contentDescription="@string/txt_Bienvenido"
         />
 
-
-
+    
 </LinearLayout>

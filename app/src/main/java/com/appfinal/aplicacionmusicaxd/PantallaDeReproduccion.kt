@@ -1,20 +1,24 @@
 package com.appfinal.aplicacionmusicaxd
 
+import android.content.ComponentName
+import android.content.Intent
+import android.content.ServiceConnection
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityPantallaDeReproduccionBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class PantallaDeReproduccion : AppCompatActivity() {
+class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
 
     companion object
     {
         lateinit var listaDeReproduccionCanciones : ArrayList<Musica>
         var pocisionDeLaCancion : Int = 0
-        var mediaPlayer : MediaPlayer? = null
         var estaReproduciendo = false
+        var servicioDeMusica: ServicioDeMusica? =null
     }
 
     private lateinit var binding: ActivityPantallaDeReproduccionBinding
@@ -26,12 +30,21 @@ class PantallaDeReproduccion : AppCompatActivity() {
         // Inicializando el objeto binding
         binding = ActivityPantallaDeReproduccionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //Para arranque de servicio.
+        val intent = Intent(this, ServicioDeMusica::class.java)
+        bindService(intent, this, BIND_AUTO_CREATE)
+        startService(intent)
         initializeLayout()
         binding.idBotonPlayYPause.setOnClickListener{
             if (estaReproduciendo) pauseMusic()
             else playMusic()
         }
-
+        binding.idBotonAnterior.setOnClickListener{
+            prevNextSong(increment = false)
+        }
+        binding.idBotonAvanzar.setOnClickListener{
+            prevNextSong(increment = true)
+        }
          //setContentView(R.layout.activity_pantalla_de_reproduccion)
     }
 
@@ -48,11 +61,11 @@ class PantallaDeReproduccion : AppCompatActivity() {
     {
         try
         {
-            if(mediaPlayer == null) mediaPlayer = MediaPlayer()
-            mediaPlayer!!.reset()
-            mediaPlayer!!.setDataSource(listaDeReproduccionCanciones[pocisionDeLaCancion].recorrido)
-            mediaPlayer!!.prepare()
-            mediaPlayer!!.start()
+            if(servicioDeMusica!!.mediaPlayer == null) servicioDeMusica!!.mediaPlayer = MediaPlayer()
+            servicioDeMusica!!.mediaPlayer!!.reset()
+            servicioDeMusica!!.mediaPlayer!!.setDataSource(listaDeReproduccionCanciones[pocisionDeLaCancion].recorrido)
+            servicioDeMusica!!.mediaPlayer!!.prepare()
+            servicioDeMusica!!.mediaPlayer!!.start()
             estaReproduciendo = true
             binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
         } catch (e: Exception)
@@ -71,7 +84,12 @@ class PantallaDeReproduccion : AppCompatActivity() {
                 listaDeReproduccionCanciones = ArrayList()
                 listaDeReproduccionCanciones.addAll(MainActivity.listaDeMusicaMA)
                 setLayout()
-                createMeadiaPlayer()
+            }
+            "MainActivity"->{
+                listaDeReproduccionCanciones = ArrayList()
+                listaDeReproduccionCanciones.addAll(MainActivity.listaDeMusicaMA)
+                listaDeReproduccionCanciones.shuffle()
+                setLayout()
             }
         }
     }
@@ -80,13 +98,55 @@ class PantallaDeReproduccion : AppCompatActivity() {
     {
         binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
         estaReproduciendo = true
-        mediaPlayer!!.start()
+        servicioDeMusica!!.mediaPlayer!!.start()
     }
 
     private fun pauseMusic()
     {
         binding.idBotonPlayYPause.setIconResource(R.drawable.ic_reproducir)
         estaReproduciendo = false
-        mediaPlayer!!.pause()
+        servicioDeMusica!!.mediaPlayer!!.pause()
+    }
+
+    private fun prevNextSong(increment: Boolean)
+    {
+        if(increment)
+        {
+            setSongPocisition(increment = true)
+            setLayout()
+            createMeadiaPlayer()
+        }
+        else
+        {
+            setSongPocisition(increment = false)
+            setLayout()
+            createMeadiaPlayer()
+        }
+    }
+
+    private fun setSongPocisition(increment: Boolean)
+    {
+        if(increment)
+        {
+            if(listaDeReproduccionCanciones.size - 1 == pocisionDeLaCancion)
+                pocisionDeLaCancion = 0
+            else ++pocisionDeLaCancion
+        }
+        else
+        {
+            if(0 == pocisionDeLaCancion)
+                pocisionDeLaCancion = listaDeReproduccionCanciones.size - 1
+            else --pocisionDeLaCancion
+        }
+    }
+
+    override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+        val binder = service as ServicioDeMusica.MyCarpeta
+        servicioDeMusica = binder.currentService()
+        createMeadiaPlayer()
+    }
+
+    override fun onServiceDisconnected(name: ComponentName?) {
+        servicioDeMusica = null
     }
 }
