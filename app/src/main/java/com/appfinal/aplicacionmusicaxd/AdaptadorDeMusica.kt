@@ -1,8 +1,10 @@
 package com.appfinal.aplicacionmusicaxd
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityVistaDeLasCancionesBinding
 import com.bumptech.glide.Glide
@@ -15,6 +17,7 @@ class AdaptadorDeMusica(private val contexto: Context, private val listaDeCancio
         val album = biding.idAlbumCancion
         val imagen = biding.imgCancion
         val duracion = biding.idDuracionCancion
+        val root = biding.root
     }
 
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): AdaptadorDeMusica.MiTitular
@@ -26,15 +29,17 @@ class AdaptadorDeMusica(private val contexto: Context, private val listaDeCancio
     {
         holder.titulo.text = listaDeCanciones[position].titulo
         holder.album.text = listaDeCanciones[position].album
-        holder.duracion.text = listaDeCanciones[position].duracion.toString()
+        holder.duracion.text = duracionDelFormato(listaDeCanciones[position].duracion)
 
         // Obtener y mostrar la imagen de la cacion
         Glide.with(contexto)
             .load(listaDeCanciones[position].artUri)
             .apply(RequestOptions().placeholder(R.drawable.reproductor_musica_splash_screen).centerCrop())
             .into(holder.imagen)
-
-
+        holder.root.setOnClickListener{
+            val intent = Intent(contexto, PantallaDeReproduccion::class.java)
+            ContextCompat.startActivity(contexto, intent, null)
+        }
     }
 
     override fun getItemCount(): Int
