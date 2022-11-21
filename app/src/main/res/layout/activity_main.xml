@@ -65,6 +65,7 @@
 
 <!--        Seccion para mostrar total de canciones-->
         <TextView
+            android:id="@+id/id_caciones_totales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txt_canciones_totales"
