@@ -60,6 +60,7 @@
 
 <!--    imagen de la canción actual-->
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_cancion_actual"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
@@ -71,6 +72,7 @@
 
 <!--    nombre de la canción actual-->
     <TextView
+        android:id="@+id/id_nombre_cancion_actial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -100,8 +102,9 @@
             app:iconSize="40dp"
             />
 
-<!--        Boton para pausa-->
+<!--        Boton para play y pausa-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/id_boton_play_y_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_pausa"
