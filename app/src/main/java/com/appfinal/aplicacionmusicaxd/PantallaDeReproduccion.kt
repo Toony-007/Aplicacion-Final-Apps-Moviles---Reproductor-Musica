@@ -6,6 +6,8 @@ import android.content.ServiceConnection
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
 import com.appfinal.aplicacionmusicaxd.databinding.ActivityPantallaDeReproduccionBinding
 import com.bumptech.glide.Glide
@@ -46,6 +48,14 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
             prevNextSong(increment = true)
         }
          //setContentView(R.layout.activity_pantalla_de_reproduccion)
+
+        binding.idBarraReproduccion.setOnSeekBarChangeListener(object:OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) servicioDeMusica!!.mediaPlayer!!.seekTo(progress)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+            override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+        })
     }
 
     private fun setLayout()
@@ -68,6 +78,10 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
             servicioDeMusica!!.mediaPlayer!!.start()
             estaReproduciendo = true
             binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
+            binding.idTiempoCancion.text = duracionDelFormato(servicioDeMusica!!.mediaPlayer!!.currentPosition.toLong())
+            binding.idTiempoTotal.text = duracionDelFormato(servicioDeMusica!!.mediaPlayer!!.duration.toLong())
+            binding.idBarraReproduccion.progress = 0
+            binding.idBarraReproduccion.max = servicioDeMusica!!.mediaPlayer!!.duration
         } catch (e: Exception)
         {
             return
@@ -144,41 +158,10 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
         val binder = service as ServicioDeMusica.MyCarpeta
         servicioDeMusica = binder.currentService()
         createMeadiaPlayer()
+        //servicioDeMusica!!.mostrarNotificaciones()
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
         servicioDeMusica = null
-    }
-
-    private fun prevNextSong(increment: Boolean)
-    {
-        if(increment)
-        {
-            setSongPocisition(increment = true)
-            setLayout()
-            createMeadiaPlayer()
-        }
-        else
-        {
-            setSongPocisition(increment = false)
-            setLayout()
-            createMeadiaPlayer()
-        }
-    }
-
-    private fun setSongPocisition(increment: Boolean)
-    {
-        if(increment)
-        {
-            if(listaDeReproduccionCanciones.size - 1 == pocisionDeLaCancion)
-                pocisionDeLaCancion = 0
-            else ++pocisionDeLaCancion
-        }
-        else
-        {
-            if(0 == pocisionDeLaCancion)
-                pocisionDeLaCancion = listaDeReproduccionCanciones.size - 1
-            else --pocisionDeLaCancion
-        }
     }
 }
