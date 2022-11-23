@@ -15,6 +15,7 @@ class ServicioDeMusica: Service() {
     var mediaPlayer:MediaPlayer?=null
     private lateinit var meddiaSession: MediaSessionCompat
 
+
     override fun onBind(intent: Intent?): IBinder {
         meddiaSession = MediaSessionCompat(baseContext, "Mi Musica")
         return miCarpeta
