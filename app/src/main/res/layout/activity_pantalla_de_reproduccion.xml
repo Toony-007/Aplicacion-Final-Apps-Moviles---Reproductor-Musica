@@ -19,6 +19,7 @@
 
 <!--        Boton de regresar-->
         <ImageButton
+            android:id="@+id/btn_regresar_reproduccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_regresar"
@@ -50,7 +51,7 @@
             android:src="@drawable/ic_favorito_vacio"
             android:background="@android:color/transparent"
             android:layout_marginEnd="5dp"
-            android:tint="@android:color/holo_red_dark"
+            android:tint="@android:color/white"
             tools:ignore="UseAppTint"
             android:contentDescription="@string/btn_favoritos"
             android:padding="5dp"
@@ -137,6 +138,7 @@
         >
 
         <TextView
+            android:id="@+id/id_tiempo_cancion"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
@@ -147,6 +149,8 @@
             />
 
         <androidx.appcompat.widget.AppCompatSeekBar
+
+            android:id="@+id/id_barra_reproduccion"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -154,6 +158,7 @@
             />
 
         <TextView
+            android:id="@+id/id_tiempo_total"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
@@ -177,7 +182,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_repetir"
             android:background="@android:color/transparent"
-            android:tint="@color/Rosa_Personalizado"
+            android:tint="@color/white"
             tools:ignore="NestedWeights,UseAppTint"
             android:contentDescription="@string/txt_repetir"
             android:layout_weight="1"
@@ -188,7 +193,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_ecualizador"
             android:background="@android:color/transparent"
-            android:tint="@color/Rosa_Personalizado"
+            android:tint="@color/white"
             tools:ignore="UseAppTint"
             android:contentDescription="@string/txt_ecualizador"
             android:layout_weight="1"
@@ -197,20 +202,19 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_tiempo"
-            android:background="@android:color/transparent"
-            android:tint="@color/Rosa_Personalizado"
-            tools:ignore="UseAppTint"
-            android:contentDescription="@string/txt_temporizador"
             android:layout_weight="1"
-            />
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/txt_temporizador"
+            android:src="@drawable/ic_tiempo"
+            android:tint="@color/white"
+            tools:ignore="UseAppTint" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_compartir"
             android:background="@android:color/transparent"
-            android:tint="@color/Rosa_Personalizado"
+            android:tint="@color/white"
             tools:ignore="UseAppTint"
             android:contentDescription="@string/txt_compartir"
             android:layout_weight="1"

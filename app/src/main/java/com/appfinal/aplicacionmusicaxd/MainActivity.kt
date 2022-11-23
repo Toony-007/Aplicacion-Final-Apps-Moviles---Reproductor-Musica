@@ -64,18 +64,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Asignando accion al boton favoritos.
+        /*
         binding.botonFavoritos.setOnClickListener{
             /*val intent = Intent(this@MainActivity, PantallaDeFavoritos::class.java)
             startActivity(intent)*/
             startActivity(Intent(this@MainActivity, PantallaDeFavoritos::class.java))
         }
+        */
+
 
         // Asignando accion al boton listos.
+        /*
         binding.botonListas.setOnClickListener{
             /*val intent = Intent(this@MainActivity, PantallaDeListas::class.java)
             startActivity(intent)*/
             startActivity(Intent(this@MainActivity, PantallaDeListas::class.java))
         }
+         */
 
         // Asignando accion a los botones de la barra de navegacion.
         binding.vwNavegacion.setNavigationItemSelectedListener {
@@ -91,8 +96,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Para pedir permiso
-    private fun requestRuntimePermission():Boolean
-    {
+    private fun requestRuntimePermission():Boolean {
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED)
         {
@@ -115,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permiso Concedido", Toast.LENGTH_SHORT).show()
-                listaDeMusicaMA = getAllAudio()
+                initializeLayout()
             }
             else
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)

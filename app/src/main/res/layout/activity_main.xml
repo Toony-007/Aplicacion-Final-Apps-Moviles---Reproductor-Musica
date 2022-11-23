@@ -35,32 +35,33 @@
                 android:textStyle="bold"/>
 
 <!--            Boton para favoritos-->
-            <Button
-                android:id="@+id/botonFavoritos"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="@string/btn_favoritos"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:drawableTop="@drawable/ic_favoritos"
-                android:text="@string/btn_favoritos"
-                android:textColor="@color/black"
-                android:textAllCaps="false"
-                android:textStyle="bold"/>
+<!--            <Button-->
+<!--                android:id="@+id/botonFavoritos"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/btn_favoritos"-->
+<!--                style="@style/Widget.AppCompat.Button.Borderless"-->
+<!--                android:drawableTop="@drawable/ic_favoritos"-->
+<!--                android:text="@string/btn_favoritos"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textStyle="bold"/>-->
 
 <!--            Boton para listas-->
-            <Button
-                android:id="@+id/botonListas"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="@string/btn_listas"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:drawableTop="@drawable/ic_listas"
-                android:text="@string/btn_listas"
-                android:textColor="@color/black"
-                android:textAllCaps="false"
-                android:textStyle="bold"/>
+<!--            <Button-->
+<!--                android:id="@+id/botonListas"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/btn_listas"-->
+<!--                style="@style/Widget.AppCompat.Button.Borderless"-->
+<!--                android:drawableTop="@drawable/ic_listas"-->
+<!--                android:text="@string/btn_listas"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textStyle="bold"/>-->
+<!--            -->
         </LinearLayout>
 
 <!--        Seccion para mostrar total de canciones-->
