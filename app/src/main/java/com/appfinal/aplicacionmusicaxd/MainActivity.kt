@@ -1,5 +1,6 @@
 package com.appfinal.aplicacionmusicaxd
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -36,15 +37,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //requestRuntimePermission()
+        setTheme(R.style.Rosa_Personsalizado_Navegacion)
+
+        // Inicializando el objeto binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Para la ventana de naveagcion lateral
+        toggle = ActionBarDrawerToggle(this, binding.root, R.string.txt_abierto, R.string.txt_cerrado)
+        binding.root.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if(requestRuntimePermission())
         initializeLayout()
 
 
         // ASignando accion al boton aleatorio.
         binding.botonAleatorio.setOnClickListener{
             //Toast.makeText(this@MainActivity, "Boton de aleatorio Presionado", Toast.LENGTH_SHORT).show()
-            /*val intent = Intent(this@MainActivity, PantallaDeReproduccion::class.java)
-            startActivity(intent)*/
-            startActivity(Intent(this@MainActivity, PantallaDeReproduccion::class.java))
+            val intent = Intent(this@MainActivity, PantallaDeReproduccion::class.java)
+            intent.putExtra("indice", 0)
+            intent.putExtra("clase", "MainActivity")
+            startActivity(intent)
+            //startActivity(Intent(this@MainActivity, PantallaDeReproduccion::class.java))
         }
 
         // Asignando accion al boton favoritos.
@@ -75,14 +91,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Para pedir permiso
-    private fun requestRuntimePermission()
+    private fun requestRuntimePermission():Boolean
     {
-        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 , 13)
+            return false
         }
+        return true
     }
 
     // Resultado de la solicitud de permisos
@@ -95,10 +113,12 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(requestCode == 13)
         {
-            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permiso Concedido", Toast.LENGTH_SHORT).show()
+                listaDeMusicaMA = getAllAudio()
+            }
             else
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     , 13)
         }
     }
@@ -115,18 +135,6 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initializeLayout()
     {
-        requestRuntimePermission()
-        setTheme(R.style.Rosa_Personsalizado_Navegacion)
-
-        // Inicializando el objeto binding
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Para la ventana de naveagcion lateral
-        toggle = ActionBarDrawerToggle(this, binding.root, R.string.txt_abierto, R.string.txt_cerrado)
-        binding.root.addDrawerListener(toggle)
-        toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         listaDeMusicaMA = getAllAudio()
         /*
         val listaDeCanciones = ArrayList<String>()
