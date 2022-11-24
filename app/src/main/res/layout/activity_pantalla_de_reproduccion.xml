@@ -20,7 +20,7 @@
 <!--        Boton de regresar-->
         <ImageButton
             android:id="@+id/btn_regresar_reproduccion"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_regresar"
             android:background="@android:color/transparent"
