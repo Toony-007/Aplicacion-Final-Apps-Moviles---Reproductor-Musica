@@ -6,8 +6,10 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
  import android.os.Binder
-import android.os.IBinder
-import android.support.v4.media.session.MediaSessionCompat
+ import android.os.Handler
+ import android.os.IBinder
+ import android.os.Looper
+ import android.support.v4.media.session.MediaSessionCompat
 
 class ServicioDeMusica: Service() {
     private var miCarpeta = MyCarpeta()
@@ -69,11 +71,22 @@ class ServicioDeMusica: Service() {
             PantallaDeReproduccion.servicioDeMusica!!.mediaPlayer!!.prepare()
             PantallaDeReproduccion.binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
             PantallaDeReproduccion.servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_pausa)
+            PantallaDeReproduccion.binding.idTiempoCancion.text = duracionDelFormato(mediaPlayer!!.currentPosition.toLong())
+            PantallaDeReproduccion.binding.idTiempoTotal.text = duracionDelFormato(mediaPlayer!!.duration.toLong())
+            PantallaDeReproduccion.binding.idBarraReproduccion.progress = 0
+            PantallaDeReproduccion.binding.idBarraReproduccion.max = mediaPlayer!!.duration
 
         } catch (e: Exception)
         {
             return
         }
     }
-
+    fun barraEnProgreso(){
+        runnable = Runnable {
+            PantallaDeReproduccion.binding.idTiempoCancion.text = duracionDelFormato(mediaPlayer!!.currentPosition.toLong())
+            PantallaDeReproduccion.binding.idBarraReproduccion.progress = mediaPlayer!!.currentPosition
+            Handler(Looper.getMainLooper()).postDelayed(runnable, 200)
+        }
+        Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
+    }
 }

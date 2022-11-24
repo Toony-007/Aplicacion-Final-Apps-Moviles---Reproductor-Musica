@@ -16,7 +16,7 @@ import com.appfinal.aplicacionmusicaxd.databinding.ActivityPantallaDeReproduccio
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
+class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCompletionListener {
     private lateinit var runnable: Runnable
 
     companion object
@@ -45,6 +45,7 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
         startService(intent)
 
         initializeLayout()
+        binding.btnRegresarReproduccion.setOnClickListener { finish() }
         binding.idBotonPlayYPause.setOnClickListener{
             if (estaReproduciendo) pauseMusic()
             else playMusic()
@@ -87,6 +88,11 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
             estaReproduciendo = true
             binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
             servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_pausa)
+            binding.idTiempoCancion.text = duracionDelFormato(servicioDeMusica!!.mediaPlayer!!.currentPosition.toLong())
+            binding.idTiempoTotal.text = duracionDelFormato(servicioDeMusica!!.mediaPlayer!!.duration.toLong())
+            binding.idBarraReproduccion.progress = 0
+            binding.idBarraReproduccion.max = servicioDeMusica!!.mediaPlayer!!.duration
+            servicioDeMusica!!.mediaPlayer!!.setOnCompletionListener(this)
 
         } catch (e: Exception)
         {
@@ -150,11 +156,19 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
         val binder = service as ServicioDeMusica.MyCarpeta
         servicioDeMusica = binder.currentService()
         createMeadiaPlayer()
+        servicioDeMusica!!.barraEnProgreso()
+
         //servicioDeMusica!!.mostrarNotificaciones()
         //servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_pausa)
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
         servicioDeMusica = null
+    }
+
+    override fun onCompletion(mp: MediaPlayer?) {
+        setSongPocisition(increment = true)
+        createMeadiaPlayer()
+        try{setLayout()}catch (e:Exception){return}
     }
 }
