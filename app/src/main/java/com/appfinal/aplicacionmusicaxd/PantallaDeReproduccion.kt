@@ -1,11 +1,14 @@
 package com.appfinal.aplicacionmusicaxd
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
@@ -14,16 +17,20 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
+    private lateinit var runnable: Runnable
 
     companion object
     {
         lateinit var listaDeReproduccionCanciones : ArrayList<Musica>
         var pocisionDeLaCancion : Int = 0
-        var estaReproduciendo = false
+        var estaReproduciendo:Boolean = false
         var servicioDeMusica: ServicioDeMusica? =null
+        @SuppressLint("StaticFieldLeak")
+        lateinit var binding: ActivityPantallaDeReproduccionBinding
     }
 
-    private lateinit var binding: ActivityPantallaDeReproduccionBinding
+    //private lateinit var binding: ActivityPantallaDeReproduccionBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +43,7 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
         val intent = Intent(this, ServicioDeMusica::class.java)
         bindService(intent, this, BIND_AUTO_CREATE)
         startService(intent)
+
         initializeLayout()
         binding.idBotonPlayYPause.setOnClickListener{
             if (estaReproduciendo) pauseMusic()
@@ -78,10 +86,8 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
             servicioDeMusica!!.mediaPlayer!!.start()
             estaReproduciendo = true
             binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
-            binding.idTiempoCancion.text = duracionDelFormato(servicioDeMusica!!.mediaPlayer!!.currentPosition.toLong())
-            binding.idTiempoTotal.text = duracionDelFormato(servicioDeMusica!!.mediaPlayer!!.duration.toLong())
-            binding.idBarraReproduccion.progress = 0
-            binding.idBarraReproduccion.max = servicioDeMusica!!.mediaPlayer!!.duration
+            servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_pausa)
+
         } catch (e: Exception)
         {
             return
@@ -108,16 +114,16 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
         }
     }
 
-    private fun playMusic()
-    {
+    private fun playMusic() {
         binding.idBotonPlayYPause.setIconResource(R.drawable.ic_pausa)
+        servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_pausa)
         estaReproduciendo = true
         servicioDeMusica!!.mediaPlayer!!.start()
     }
 
-    private fun pauseMusic()
-    {
+    private fun pauseMusic() {
         binding.idBotonPlayYPause.setIconResource(R.drawable.ic_reproducir)
+        servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_reproducir)
         estaReproduciendo = false
         servicioDeMusica!!.mediaPlayer!!.pause()
     }
@@ -138,27 +144,14 @@ class PantallaDeReproduccion : AppCompatActivity(), ServiceConnection {
         }
     }
 
-    private fun setSongPocisition(increment: Boolean)
-    {
-        if(increment)
-        {
-            if(listaDeReproduccionCanciones.size - 1 == pocisionDeLaCancion)
-                pocisionDeLaCancion = 0
-            else ++pocisionDeLaCancion
-        }
-        else
-        {
-            if(0 == pocisionDeLaCancion)
-                pocisionDeLaCancion = listaDeReproduccionCanciones.size - 1
-            else --pocisionDeLaCancion
-        }
-    }
+
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         val binder = service as ServicioDeMusica.MyCarpeta
         servicioDeMusica = binder.currentService()
         createMeadiaPlayer()
         //servicioDeMusica!!.mostrarNotificaciones()
+        //servicioDeMusica!!.mostrarNotificaciones(R.drawable.ic_pausa)
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {

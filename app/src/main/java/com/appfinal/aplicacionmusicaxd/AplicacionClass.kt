@@ -9,10 +9,10 @@ import androidx.core.app.NotificationManagerCompat
 class AplicacionClass:Application (){
     companion object{
         const val ID_CANAL="canal_1"
-        const val PLAY="play"
-        const val SIGUIENTE="siguiente"
-        const val ANTERIOR="anterior"
-        const val SALIR="salir"
+        const val PLAY="Play"
+        const val SIGUIENTE="Siguiente"
+        const val ANTERIOR="Anterior"
+        const val SALIR="Salir"
     }
     override fun onCreate() {
         super.onCreate()
